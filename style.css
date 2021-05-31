@@ -11,6 +11,8 @@ body {
   --editor: #ffffff;
   --editor-content: #000000;
   --status-bar: #007acc;
+  --link: #0000ff;
+
   display: grid;
   grid-template-rows: 28px 1fr 20px;
   width: 100vw;
@@ -25,6 +27,7 @@ body.dark {
   --editor: #1e1e1e;
   --editor-content: #ffffff;
   --status-bar: #007acc;
+  --link: #ce9178;
 }
 
 .top-bar {
@@ -61,4 +64,8 @@ button {
   border: 1px solid rgba(128, 128, 128, 0.432);
   border-radius: 2px;
   cursor: pointer;
+}
+
+a {
+  color: var(--link);
 }
