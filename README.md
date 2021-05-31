@@ -39,3 +39,8 @@
 - f12 개발자 도구에서 esc key 눌러서 하단 console 창을 뛰움
 - three dot (more tools) 눌러서 `Rendering` 탭 오픈
 - 스크롤 중간 Emulate CSS media feature prefer-color-scheme 에서 테마 선택
+
+## localStorage에 theme 상태 저장
+
+- 최초 접속, 테마 토글 마다 localStorage 갱신
+- 새로고침 혹은 다음 접속에도 특정 테마 유지
