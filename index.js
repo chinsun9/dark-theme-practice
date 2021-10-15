@@ -16,9 +16,7 @@ function initTheme() {
   // check local storage
   const theme =
     localStorage.getItem(THEME_KEY) ||
-    window.matchMedia('(prefers-color-scheme: dark)')
-      ? DARK
-      : LIGHT;
+    (window.matchMedia('(prefers-color-scheme: dark)') ? DARK : LIGHT);
 
   updateTheme(theme);
 }
