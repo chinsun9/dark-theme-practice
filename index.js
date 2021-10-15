@@ -1,40 +1,39 @@
+const DARK = 'dark';
+const LIGHT = 'light';
+const THEME_KEY = 'theme';
+
+function updateTheme(theme) {
+  console.trace(theme);
+
+  localStorage.setItem(THEME_KEY, theme);
+  document.body.classList[theme === DARK ? 'add' : 'remove'](DARK);
+  document.documentElement.setAttribute('data-color-scheme', theme);
+}
+
 function initTheme() {
-  // chk local storage
-  const theme = localStorage.getItem("theme");
-  if (theme === "dark") {
-    console.log(`load theme`);
-    document.body.classList.add("dark");
-    return;
-  }
-  if (theme === "light") {
-    console.log(`load theme`);
-    return;
-  }
+  console.trace();
 
-  //   visit first time
-  const isDark = window.matchMedia("(prefers-color-scheme: dark)");
-  if (isDark) document.body.classList.add("dark");
+  // check local storage
+  const theme =
+    localStorage.getItem(THEME_KEY) ||
+    window.matchMedia('(prefers-color-scheme: dark)')
+      ? DARK
+      : LIGHT;
 
-  localStorage.setItem("theme", isDark ? "dark" : "light");
+  updateTheme(theme);
 }
 
 function toggleTheme() {
-  console.log(`toggle theme`);
-  document.body.classList.toggle("dark");
-  localStorage.setItem("theme", document.body.className ? "dark" : "light");
+  console.trace();
+
+  document.body.classList.toggle(DARK);
+  const theme = document.body.classList.contains(DARK) ? DARK : LIGHT;
+  updateTheme(theme);
 }
 
 window
-  .matchMedia("(prefers-color-scheme: dark)")
-  .addEventListener("change", (e) => {
-    const newColorScheme = e.matches ? "dark" : "light";
-    localStorage.setItem("theme", newColorScheme);
-
-    if (newColorScheme === "dark") {
-      document.body.classList.add("dark");
-      return;
-    }
-    document.body.classList.remove("dark");
+  .matchMedia('(prefers-color-scheme: dark)')
+  .addEventListener('change', (e) => {
+    const theme = e.matches ? DARK : LIGHT;
+    updateTheme(theme);
   });
-
-initTheme();
