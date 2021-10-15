@@ -4,10 +4,22 @@
   padding: 0;
 }
 
+html {
+  background-color: transparent !important;
+}
+
+[data-color-scheme='dark'] {
+  color-scheme: dark;
+}
+
+[data-color-scheme='light'] {
+  color-scheme: light;
+}
+
 body {
   --top-bar: #dddddd;
   --activity-bar: #2c2c2c;
-  --side-bar: #61616130;
+  --side-bar: #f3f3f3;
   --editor: #ffffff;
   --editor-content: #000000;
   --status-bar: #007acc;
