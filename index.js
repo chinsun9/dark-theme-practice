@@ -1,37 +1,37 @@
-const DARK = 'dark';
-const LIGHT = 'light';
-const THEME_KEY = 'theme';
+const STORAGE_THEME_KEY = 'darkTheme';
+const HTML_THEME_DATASET_KEY = 'data-color-scheme';
+const HTML = document.documentElement;
+const TOGGLE_BUTTON_ID = 'themeToggleButton';
 
-function updateTheme(theme) {
-  console.trace(theme);
+const getJsonFromStorage = (key) => JSON.parse(localStorage.getItem(key));
 
-  localStorage.setItem(THEME_KEY, theme);
-  document.body.classList[theme === DARK ? 'add' : 'remove'](DARK);
-  document.documentElement.setAttribute('data-color-scheme', theme);
-}
+const updateTheme = (isDark) => {
+  localStorage.setItem(STORAGE_THEME_KEY, isDark);
+  HTML.setAttribute(HTML_THEME_DATASET_KEY, isDark ? 'dark' : 'light');
+};
 
-function initTheme() {
-  console.trace();
+const initTheme = () => {
+  const isDark =
+    getJsonFromStorage(STORAGE_THEME_KEY) ??
+    window.matchMedia('(prefers-color-scheme: dark)').matches;
+  updateTheme(isDark);
+};
 
-  // check local storage
-  const theme =
-    localStorage.getItem(THEME_KEY) ||
-    (window.matchMedia('(prefers-color-scheme: dark)') ? DARK : LIGHT);
+const toggleTheme = () => {
+  const isDark = getJsonFromStorage(STORAGE_THEME_KEY);
+  updateTheme(!isDark);
+};
 
-  updateTheme(theme);
-}
-
-function toggleTheme() {
-  console.trace();
-
-  document.body.classList.toggle(DARK);
-  const theme = document.body.classList.contains(DARK) ? DARK : LIGHT;
-  updateTheme(theme);
-}
+window.addEventListener('click', (e) => {
+  if (e.target.id !== TOGGLE_BUTTON_ID) return;
+  toggleTheme();
+});
 
 window
   .matchMedia('(prefers-color-scheme: dark)')
   .addEventListener('change', (e) => {
-    const theme = e.matches ? DARK : LIGHT;
-    updateTheme(theme);
+    const isDark = e.matches;
+    updateTheme(isDark);
   });
+
+initTheme();

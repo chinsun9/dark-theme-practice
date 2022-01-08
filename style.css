@@ -8,31 +8,8 @@ html {
   background-color: transparent !important;
 }
 
-[data-color-scheme='dark'] {
+html[data-color-scheme='dark'] {
   color-scheme: dark;
-}
-
-[data-color-scheme='light'] {
-  color-scheme: light;
-}
-
-body {
-  --top-bar: #dddddd;
-  --activity-bar: #2c2c2c;
-  --side-bar: #f3f3f3;
-  --editor: #ffffff;
-  --editor-content: #000000;
-  --status-bar: #007acc;
-  --link: #0000ff;
-
-  display: grid;
-  grid-template-rows: 28px 1fr 20px;
-  width: 100vw;
-
-  height: 100vh;
-}
-
-body.dark {
   --top-bar: #3c3c3c;
   --activity-bar: #333333;
   --side-bar: #252526;
@@ -42,11 +19,29 @@ body.dark {
   --link: #ce9178;
 }
 
+html[data-color-scheme='light'] {
+  color-scheme: light;
+  --top-bar: #dddddd;
+  --activity-bar: #2c2c2c;
+  --side-bar: #f3f3f3;
+  --editor: #ffffff;
+  --editor-content: #000000;
+  --status-bar: #007acc;
+  --link: #0000ff;
+}
+
+body {
+  display: grid;
+  grid-template-rows: 28px 1fr 20px;
+  width: 100vw;
+  height: 100vh;
+}
+
 .top-bar {
   background-color: var(--top-bar);
 }
 
-.body {
+main {
   display: grid;
   grid-template-columns: 50px 300px 1fr;
 }
@@ -73,7 +68,7 @@ button {
   padding: 10px 20px;
   color: var(--editor-content);
   background-color: transparent;
-  border: 1px solid rgba(128, 128, 128, 0.432);
+  border: 1px solid rgba(128, 128, 128, 0.4);
   border-radius: 2px;
   cursor: pointer;
 }
